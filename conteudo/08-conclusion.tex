@@ -1,0 +1,21 @@
+%!TeX root=../tese.tex
+%("dica" para o editor de texto: este arquivo é parte de um documento maior)
+% para saber mais: https://tex.stackexchange.com/q/78101
+
+\chapter{Conclusion}
+
+
+
+In conclusion we believe we were able to achieve both of the goals set at the beginning of this project, our results show that is indeed possible for a deep learning model to predict fine-grained refactorings and we were successful in creating a number of models for automated function extraction refactoring. 
+
+Our final model consisted of the pointer network architecture the ``distiluse-base-multilingual-cased-v1'' embedding  and the hyperparameter values obtained with Optuna,  with this model we achieved a test loss and a test accuracy of  5.768 and 0.7275 respectively. We believe this results once again corroborate the hypothesis of naturality and show the soundness of our approach.
+
+However, the models we trained were always hovering an accuracy of around 70\%. Changing architectures, embeddings and hyperparameter values had a clear effect in the performance of the models but always in an incremental fashion with small gains to performance.
+
+We hypothesize that to achieve significant gains in performance we would need to explore embeddings that also leverage the source code itself (by, for example, utilizing abstract syntax trees) instead of solely relying on natural language models. This is a hypothesis that we are interested in pursuing in future work.
+
+
+We were also able to develop a new Java code refactoring dataset for function extractions that was over 60\% bigger than the biggest dataset of its type published at the moment of elaboration of this report.
+
+
+Through this we also hope to show that deep learning models are capable of predicting fine-grained refactorings, that they are able to dictate how exactly a snippet of code should be altered to obtain a successful refactoring.

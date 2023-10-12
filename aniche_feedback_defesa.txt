@@ -1,0 +1,30 @@
+Oi pessoal,
+
+Seguem minhas notas;
+
+Comentários gerais:
+- Trabalho muito muito legal!
+- Texto: bem refrescante de ler e fácil. Um pouco informal, e pra uma publicação, precisaria ser re-escrito de maneira mais perto do que a comunidade está acostumada. A parte de resultados está mais formal, e ali, não precisa de tanta reescrita.
+- Só de ler, eu não entendi o modelo final. Ficou um pouco misturado o número de experimentos que vc fez com o modelo final, em especial embeddings com o pointer network. Seria interessante uma seção com uma figura descrevendo o seu modelo final. (No paper, vc não precisa contar a história na ordem em que as coisas aconteceram, mas sim, em uma ordem mais lógica, seguindo suas questões de pesquisa)
+- Faltaram questões de pesquisa claras ali na seção de metodologia e resultados. Faltou também uma seção de ameaças a validade explícita. (Não precisa pro mestrado, mas pro paper com certeza)
+- Você poderia adicionar uns exemplos de predição do modelo, umas 2 onde ele acertou, umas 2 onde a intersecção foi quase perfeita, umas duas onde ele errou feio.
+- Falta de tempo é uma boa explicação pro mestrado, mas não tão boa pra um paper. Precisa de uma melhor :)
+- Onde está o seu dataset e código? Está no github? Vamos por dentro do github do refactoring-ai?
+- A discussão da IDE fictícia deveria acontecer depois e não antes, meio que como uma seção de discussão, onde você falaria sobre como esse modelo poderia ser utilizado na prática.
+
+Perguntas:
+
+- Resultados bem legais, e acurácia de 70% é bem legal já. Será que conseguimos um aluno/a de bacharelado pra implementar um plugin de IntelliJ pra isso? Seria demais!
+- Na figura 7.9, como vc explica a queda na acurácia do conjunto de validação na 2a iteração?
+- A rede aponta pra "linhas inteiras" que devem ser extraídas. Algumas refatorações, no entanto, ocorrem entre “linhas parciais”. Seria difícil treinar um modelo com isso?
+- Como que as novas e super poderosas LLMs afetam o seu projeto? Quando você começou, nada disso funcionava :)
+- Qual foi a parte mais difícil desse projeto? O que vc faria diferente? O que vc faria se tivesse mais tempo?
+
+Referências (Aline, vc pediu também)
+
+- Paper do Miltos sobre código duplicado e o quanto afeta modelos: https://dl.acm.org/doi/pdf/10.1145/3359591.3359735
+- Uma pergunta da Aline sobre vocabulário e o Alan mencionou que é difícil pq devs criam palavras próprias. O "vocabulary problem" já foi bastante estudado também, e 2, 3 anos atrás, muita gente estava tentando byte pair encoding (https://en.wikipedia.org/wiki/Byte_pair_encoding). Um paper recente que está na minha lista pra ler, mas não li ainda é esse: https://arxiv.org/pdf/2203.03850.pdf
+
+Parabéns novamente, Alan!
+
+Um abraço,

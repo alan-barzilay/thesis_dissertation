@@ -1,0 +1,43 @@
+Ideia muio boa e promissora! Ótimo para um artigo, mas para mim falta embasamento teórico.
+Ou seja, vale um artigo, mas na atual situação nem uma quali...
+
+Li mais rápido que o Denis
+Denis: Uso de um método, Baseline ou outras formas, melhorar o bounding box (função),
+métrica mais simples
+
+Gancho na resposta só não quebrar é pouco!
+
+Issues:
+Você está proprondo uma solução para o problema, sem procurar justificá-la de forma mais ampla, isso é bem tendencioso.
+
+O trabalho relacionado se mistura com o background, boa parte de métricas é trabalho já consolidado.
+Mas, o pior é que não há um estado da arte real, não fica claro que o que você quer fazer é realmente novo.
+
+Tinha que ter apresentado o RefactoringMiner em detalhes!
+
+Para uma qualificação seria necessário já ter algo que indicasse que há resultados iniciais, ainda não vi isso, ou em outras palavras, algo da Seção 4.2 já teria que estar em andamento
+
+Claro que com tudo isso, não acho o cronograma realista...
+
+Faltaram detalhes como do tipo estrutura de dados certa a se usar: Union Find
+
+Perguntas:
+Por que não usar algo mais amplo para métricas como code climate ou sonarQube?
+
+Será que usar exemplos de bons refatoração não poderia ajudar?
+
+Como validar se deu certo?
+
+E se houver concorrência?
+
+Estilo:
+Eu prefiro uma introdução com menos detalhes técnicos e que possa ser lida
+por não especialistas.
+Afirmações não claras tem que ser embasadas (can’t be said about formal languages).
+Por que NLP pode ser útil para refatoração (dê evidências), ou cite analogias com linguagens
+
+
+Detalhes:
+Cuidado com o uso do We, só use se for algo de autoria sua
+Evite o uso de contrações
+Espaço entre o texto e referência

@@ -1,0 +1,35 @@
+%!TeX root=../tese.tex
+%("dica" para o editor de texto: este arquivo é parte de um documento maior)
+% para saber mais: https://tex.stackexchange.com/q/78101
+
+% As palavras-chave são obrigatórias, em português e em inglês, e devem ser
+% definidas antes do resumo/abstract. Acrescente quantas forem necessárias.
+\palavrachave{Aprendizado de Máquina}
+\palavrachave{Refatoração}
+\palavrachave{Processamento de Linguagem Natural}
+\palavrachave{Engenharia de Software}
+
+
+\keyword{Machine Learning}
+\keyword{Code Refactoring}
+\keyword{Natural Language Processing}
+\keyword{Software Engineering}
+
+
+% O resumo é obrigatório, em português e inglês. Estes comandos também
+% geram automaticamente a referência para o próprio documento, conforme
+% as normas sugeridas da USP.
+\resumo{
+Técnicas de processamento de linguagem natural podem ser aplicadas aos mais diversos textos, não somente àqueles redigidos em  linguagens humanas como também àqueles redigidos em linguagens ditas artificiais, como códigos escritos em linguagens de programação.
+Refatoração de código é uma técnica fundamental em engenharia de software, sendo utilizada tanto como uma ferramenta para garantir a qualidade do código como também como um passo importante na expansão de funcionalidades e depuração.
+Nesse trabalho propomos um modelo para refatoração automática de código. Ao utilizar diretamente o código fonte como entrada em nosso modelo de processamento de código nós obtemos automaticamente sugestões de refatorações do tipo extração de função. 
+O modelo proposto consiste em uma rede neural capaz de receber uma representação vetorial do código a ser refatorado e gerar uma representação da refatoração sugerida.
+Essa rede foi treinada com base numa lista de repositórios de código obtida através de uma colaboração com a TU Delft na Holanda. Com base nessa lista foi criado o maior dataset de refatorações de extração de função existente --- até o momento da publicação dessa tese --- sendo 60\% maior do que o segundo maior dataset de seu tipo. Além disso, nosso modelo final atingiu uma acurácia de teste de 0.7275.
+}
+
+\abstract{
+Natural Language Processing techniques can be applied to text in general, not only to human language but also to artificial languages such as software code. Code refactoring is a fundamental software engineering technique used both as a quality assurance tool and an important step in code correction and functionality enhancement. 
+In this work, we propose a novel code refactoring model.
+By utilizing source code as input to our model we obtain automated suggestions of function extraction code refactoring in order to achieve better readability and attain good practices in general. The proposed model consists of a neural network that receives a vectorial representation of the source code and outputs a representation of the suggested refactored code. This network was trained based on a list of repositories provided through a collaboration with TU Delft Holland. Based on this list we created the biggest existing function extraction refactoring dataset --- as of the time this thesis was presented --- being \%60 bigger than the second biggest dataset of its type. Furthermore, our final model achieved a test accuracy of 0.7275.
+}
+

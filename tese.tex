@@ -1,0 +1,573 @@
+% Arquivo LaTeX de exemplo de dissertação/tese a ser apresentada à CPG do IME-USP
+%
+% Criação: Jesús P. Mena-Chalco
+% Revisão: Fabio Kon e Paulo Feofiloff
+% Adaptação para UTF8, biblatex e outras melhorias: Nelson Lago
+%
+% Except where otherwise indicated, these files are distributed under
+% the MIT Licence. The example text, which includes the tutorial and
+% examples as well as the explanatory comments in the source, are
+% available under the Creative Commons Attribution International
+% Licence, v4.0 (CC-BY 4.0) - https://creativecommons.org/licenses/by/4.0/
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREÂMBULO LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A opção twoside (frente-e-verso) significa que a aparência das páginas pares
+% e ímpares pode ser diferente. Por exemplo, as margens podem ser diferentes ou
+% os números de página podem aparecer à direita ou à esquerda alternadamente.
+% Mas nada impede que você crie um documento "só frente" e, ao imprimir, faça
+% a impressão frente-e-verso.
+%
+% Aqui também definimos a língua padrão do documento
+% (a última da lista) e línguas adicionais.
+\documentclass[12pt,twoside,brazilian,english]{book}
+% \documentclass[12pt,twoside,english,brazilian]{book}
+
+% Ao invés de definir o tamanho das margens, vamos definir os tamanhos do
+% texto, do cabeçalho e do rodapé, e deixamos a package geometry calcular
+% o tamanho das margens em função do tamanho do papel. Assim, obtemos o
+% mesmo resultado impresso, mas com margens diferentes, se o tamanho do
+% papel for diferente.
+\usepackage[a4paper]{geometry}
+
+\geometry{
+  textwidth=152mm,
+  hmarginratio=12:17, % 24:34 -> com papel A4, 24mm + 152mm + 34mm = 210mm
+  textheight=237mm,
+  vmarginratio=8:7, % 32:28 -> com papel A4, 32mm + 237mm + 28mm = 297mm
+  headsep=11mm, % distância entre a base do cabeçalho e o texto
+  headheight=21mm, % qualquer medida grande o suficiente, p.ex., top - headsep
+  footskip=10mm,
+  marginpar=20mm,
+  marginparsep=5mm,
+}
+
+% Vários pacotes e opções de configuração genéricos; para personalizar o
+% resultado, modifique estes arquivos.
+\input{extras/basics}
+\input{extras/languages}
+\input{extras/fonts}
+\input{extras/floats}
+\input{extras/imeusp-thesis} % capa, páginas preliminares e alguns detalhes
+\input{extras/imeusp-formatting}
+\input{extras/index}
+\input{extras/bibconfig}
+\input{extras/hyperlinks}
+%\nocolorlinks % para impressão em P&B
+\input{extras/source-code}
+\input{extras/utils}
+
+% Diretórios onde estão as figuras; com isso, não é preciso colocar o caminho
+% completo em \includegraphics (e nem a extensão).
+\graphicspath{{figuras/},{logos/}}
+
+% Comandos rápidos para mudar de língua:
+% \en -> muda para o inglês
+% \br -> muda para o português
+% \texten{blah} -> o texto "blah" é em inglês
+% \textbr{blah} -> o texto "blah" é em português
+\babeltags{br = brazilian, en = english}
+
+% Bibliografia
+\usepackage[
+  style=extras/plainnat-ime, % variante de autor-data, similar a plainnat
+  %style=alphabetic, % similar a alpha
+  %style=numeric, % comum em artigos
+  %style=authoryear-comp, % autor-data "padrão" do biblatex
+  %style=apa, % variante de autor-data, muito usado
+  %style=abnt,
+]{biblatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Barzi coisas %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pifont}
+% \usepackage{url}
+\usepackage{amsthm} % pra "teoremas" nao numerados
+\newtheorem*{theorem}{Naturalness Hypothesis}
+
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\definecolor{backquote}{RGB}{249,245,233}
+\newtcolorbox{myquote}[1][]{%
+    enhanced, breakable, 
+    size=small,
+    frame hidden, boxrule=0pt,
+    sharp corners,
+    colback=backquote,
+    width=0.85\linewidth,
+    center,
+    #1
+}
+% \ShellEscape{cp /usr/local/share/latexmk/LatexMk ./LatexMk}
+
+\usepackage{minted} % pra fazer syntax highlight em codigo q eu escrever
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+\usepackage{tabularx}
+
+%mfinger
+\newcommand{\mfinger}[1]{\todo[color=green!30]{#1}}
+\newcommand{\mfingeri}[1]{\todo[color=green!30,inline]{#1}}
+
+%barzi
+% \newcommand{\barzi}[1]{\todo[]{#1}}
+\newcommand{\barzi}[1]{\todo[inline]{#1}}
+
+
+% \DeclareUnicodeCharacter{0301}{*************************************} %religar caso bib de pau de novo
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METADADOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% O arquivo com os dados bibliográficos para biblatex; você pode usar
+% este comando mais de uma vez para acrescentar múltiplos arquivos
+\addbibresource{bibliografia.bib}
+
+% Este comando permite acrescentar itens à lista de referências sem incluir
+% uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
+%\nocite{bronevetsky02,schmidt03:MSc, FSF:GNU-GPL, CORBA:spec, MenaChalco08}
+% Com este comando, todos os itens do arquivo .bib são incluídos na lista
+% de referências
+%\nocite{*}
+
+% É possível definir como determinadas palavras podem (ou não) ser
+% hifenizadas; no entanto, a hifenização automática geralmente funciona bem
+\babelhyphenation{documentclass latexmk soft-ware clsguide} % todas as línguas
+\babelhyphenation[brazilian]{Fu-la-no}
+\babelhyphenation[english]{what-ever}
+
+% Estes comandos definem o título e autoria do trabalho e devem sempre ser
+% definidos, pois além de serem utilizados para criar a capa, também são
+% armazenados nos metadados do PDF.
+\title{
+    % Obrigatório nas duas línguas
+    titlept={Utilizando técnicas de processamento de linguagem natural para refatoração automática de código},
+    titleen={Using Natural Language Processing techniques for automated code refactoring},
+    % Opcional, mas se houver deve existir nas duas línguas
+    % subtitlept={um subtítulo},
+    % subtitleen={a subtitle},
+    % shorttitle={NLP Code}, % pelo jeito n existe mais esse comando  algo mudou da quali pra ca, mas n sei se isso eh ruim pra mim na real
+}
+
+\author{Alan Barzilay}
+
+% Para TCCs, este comando define o supervisor
+\orientador{Prof. Dr. Marcelo Finger}
+
+% Se não houver, remova; se houver mais de um, basta
+% repetir o comando quantas vezes forem necessárias
+% \coorientador{Prof. Dr. Ciclano de Tal}
+% \coorientador[fem]{Profª. Drª. Beltrana de Tal}
+
+% A página de rosto da versão para depósito (ou seja, a versão final
+% antes da defesa) deve ser diferente da página de rosto da versão
+% definitiva (ou seja, a versão final após a incorporação das sugestões
+% da banca).
+\defesa{
+  nivel=mestrado, % mestrado, doutorado ou tcc
+  % É a versão para defesa ou a versão definitiva?
+  definitiva,
+  % É qualificação?
+  %quali,
+  programa={Computer Science},%{Ciência da Computação},
+  membrobanca={Prof. Dr. Marcelo Finger (advisor) -- IME-USP},
+  % Em inglês, não há o "ª"
+  %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Eduardo Martins Guerra -- unibz},
+  membrobanca={Prof. Dr. Aline Marins Paes Carvalho -- UFF},
+  % Se não houve bolsa, remova
+  %
+  % Norma sobre agradecimento por auxílios da FAPESP:
+  % https://fapesp.br/11789/referencia-ao-apoio-da-fapesp-em-todas-as-formas-de-divulgacao
+  %
+  % Norma sobre agradecimento por auxílios da CAPES (Portaria 206,
+  % de 4 de Setembro de 2018):
+  % https://www.in.gov.br/materia/-/asset_publisher/Kujrw0TZC2Mb/content/id/39729251/do1-2018-09-05-portaria-n-206-de-4-de-setembro-de-2018-39729135
+  %
+  %apoio={O presente trabalho foi realizado com apoio da Coordenação
+  %       de Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Código de Financiamento 001}, % o código é sempre 001
+  %
+  %apoio={This study was financed in part by the Coordenação de
+  %       Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Finance Code 001}, % o código é sempre 001
+  %
+  %apoio={Durante o desenvolvimento deste trabalho, o autor recebeu\\
+  %       auxílio financeiro da FAPESP -- processo nº aaaa/nnnnn-d},
+  %
+  %apoio={During the development if this work, the author received\\
+  %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
+  %
+  apoio={This study was financed in part by the \textit{Coordenação de Aperfeiçoamento de Pessoal de Nível Superior – Brasil} (CAPES) – Finance Code 001. This study was also financed in part by the grant \#2020/02679-4 from the São Paulo Research Foundation (FAPESP). },
+  local={São Paulo},
+  data=2023-03-27, % YYYY-MM-DD
+  % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
+  % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
+  % correspondente (o sistema insere automaticamente o texto da licença).
+  % Se quiser estabelecer regras diferentes para o uso de seu trabalho,
+  % converse com seu orientador e coloque o texto da licença aqui, mas
+  % observe que apenas TCCs sob alguma licença Creative Commons serão
+  % acrescentados ao BDTA. Se você tem alguma intenção de publicar o
+  % trabalho comercialmente no futuro, sugerimos a licença CC-BY-NC-ND.
+  % direitos={CC-BY}, % Creative Commons Attribution 4.0 International License
+  %direitos={CC-BY-NC-ND}, % Creative Commons Attribution / NonCommercial /
+                           % NoDerivatives 4.0 International License
+  %direitos={Autorizo a reprodução e divulgação total ou parcial
+  %          deste trabalho, por qualquer meio convencional ou
+  %          eletrônico, para fins de estudo e pesquisa, desde que
+  %          citada a fonte.},
+  direitos={I authorize the complete or partial reproduction and disclosure
+           of this work by any conventional or electronic means for study
+           and research purposes, provided that the source is acknowledged.},
+  % Para gerar a ficha catalográfica, acesse https://fc.ime.usp.br/,
+  % preencha o formulário e escolha a opção "Gerar Código LaTeX".
+  % Basta copiar e colar o resultado aqui.
+  fichacatalografica={% Este codigo depende das packages calc, setspace e ragged2e
+% (ja incluidas no modelo LaTeX do IME-USP)
+\begingroup\centering\singlespacing\small
+\hyphenrules{nohyphenation}\hbadness=10000
+Ficha catalográfica elaborada com dados inseridos pelo(a) autor(a)\\
+Biblioteca Carlos Benjamin de Lyra\\
+Instituto de Matemática e Estatística\\
+Universidade de São Paulo\par
+\vspace{2\baselineskip}\hrule\vspace{.8\baselineskip}
+\RaggedRightRightskip 0pt plus 30pt minus 0pt\relax
+\RaggedRightParfillskip 20pt plus 40pt minus 10pt\relax
+\ttfamily\hspace{2em}\begin{minipage}[t]{125mm}
+\RaggedRight\sloppy\setlength{\parindent}{\widthof{123}}
+
+\noindent Barzilay, Alan
+
+Utilizando técnicas de processamento de linguagem natural para refatoração automática de código / Alan Barzilay; orientador, Marcelo Finger. - São Paulo, 2023.
+
+115 p.: il.
+
+\vspace{1\baselineskip}
+
+
+\vspace{1\baselineskip}
+
+
+Dissertação (Mestrado) - Programa de Pós-Graduação em Ciência da Computação / Instituto de Matemática e Estatística / Universidade de São Paulo.
+
+Bibliografia
+
+Versão original
+
+\vspace{1\baselineskip}
+
+
+\vspace{1\baselineskip}
+
+
+1. Aprendizado de Máquina. 2. Refatoração. 3. Processamento de Linguagem Natural. 4. Engenharia de Software. I. Finger, Marcelo. II. Título.
+
+\end{minipage}\par
+\vspace{1\baselineskip}\hrule\vspace{.5\baselineskip}\rmfamily
+Bibliotecárias do Serviço de Informação e Biblioteca\\
+Carlos Benjamin de Lyra do IME-USP, responsáveis pela\\
+estrutura de catalogação da publicação de acordo com a AACR2:\\
+Maria Lúcia Ribeiro CRB-8/2766; Stela do Nascimento Madruga CRB 8/7534.
+\par\endgroup},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% AQUI COMEÇA O CONTEÚDO DE FATO %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPA E PÁGINAS INICIAIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui começa o conteúdo inicial que aparece antes do capítulo 1, ou seja,
+% página de rosto, resumo, sumário etc. O comando frontmatter faz números
+% de página aparecem em algarismos romanos ao invés de arábicos e
+% desabilita a contagem de capítulos.
+\frontmatter
+
+\pagestyle{plain}
+
+\onehalfspacing % Espaçamento 1,5 na capa e páginas iniciais
+
+\maketitle % capa e folha de rosto
+
+%%%%%%%%%%%%%%%% DEDICATÓRIA, AGRADECIMENTOS, RESUMO/ABSTRACT %%%%%%%%%%%%%%%%%%
+
+\begin{dedicatoria}
+\href{https://xkcd.com/114/}{\includegraphics[scale=0.85]{figuras/xkcd.png} }
+\nocite{xkcd}
+\label{xkcd}
+% Esta seção é opcional e fica numa página separada; ela pode ser usada para
+% uma dedicatória ou epígrafe.
+\end{dedicatoria}
+
+% Reinicia o contador de páginas (a próxima página recebe o número "i") para
+% que a página da dedicatória não seja contada.
+\pagenumbering{roman}
+
+% Agradecimentos:
+% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar
+% esta página. A epígrafe, obviamente, é opcional; é possível colocar
+% epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
+% não ser incluída no sumário.
+\chapter*{Agradecimentos}
+% \epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+
+Gostaria de agradecer à minha família pelo apoio e sustento que me proporcionaram ao longo dessa longa jornada como mestrando. Especialmente meu primo, David Barzilai, que me acompanhou enquanto eu escrevia parte dessa tese e até me abrigou em sua casa por uns dias enquanto eu terminava mais uma versão do texto.
+
+Ainda sobre abrigo, gostaria de agradecer meu amigo Lucas Magno por sempre me receber de portas abertas em sua sala. A vida acadêmica pode ser bem solitária, mas sempre ter com quem bandejar certamente ajuda.
+
+Gostaria também de agradecer meus amigos Mauricio, Zeca e a família deles\footnote{Menos a gata Gigi} por sempre me receberem e me alimentarem quando eu ia passar o dia trabalhando lá. Não sei o por que eles achavam tão razoável e normal eu ir lá com tanta frequência mas sou muito grato por isso.
+Além de me receberem, eles auxiliaram essa tese de diversas formas diretas e indiretas; por exemplo, o Zeca, a Lira e a Júlia Rissin me resgataram de carro uma madrugada quando fiquei ilhado no meio do nada voltando da casa deles. E ainda quando o Mauricio resgatou todos os dados perdidos do HD quando o disco \texttt{sdb} da máquina ratel faleceu com o ``tec-tec da morte''.
+
+Falando na ratel, gostaria de agradecer ao Sergio Ricardo Milare e ao William Alexandre Miura Gnann da seção de informática do IME pela ajuda com essa máquina e em recuperar a última versão do meu código que eu tinha esquecido de dar \texttt{git push}. Tecnicamente a ratel nem era responsabilidade deles então sou muito grato por sempre serem tão solícitos e não só ignorarem nossos emails falando que eu quebrei a ratel de novo. 
+
+Gostaria de aproveitar para também agradecer a equipe dos restaurantes universitários, equipes de limpeza da USP, responsáveis da sala do chá do IME, a secretaria da pós do IME, o Renato Geh, Felipe "Sub" Serras e demais RDs e representantes do corpo estudantil, o Nelson Lago, o professor Carlinhos (que me fez desistir das minhas ideias ruins e só entrar no mestrado do IME logo) e todos os outros funcionários e professores do IME e da USP que me proporcionaram as condições de desenvolver esse projeto.
+
+
+Não posso deixar de agradecer meu querido orientador Marcelo Finger que sempre me deu muita liberdade e apoio ao longo do projeto, sempre trazendo novas ideias e oportunidades para mim.
+
+Gostaria de agradecer a Júlia Rissin também pela ajuda com os gráficos, me salvando de apresentar uma tese cheia de \textit{printscreens}.
+
+
+Gostaria também de agradecer todos os meus amigos e colegas que fizeram parte dessa minha jornada do mestrado, como o Gabriel Morete, Lucas Arenstein, Thiago Lima, Rebecca Helena, Pedro Souza (cara mais fascinado por \texttt{git} que eu já vi), Thiago Tarraf Varella, Estêvão, Pedro Bruel, Rodrigo Berezovsky, Arieh Szafir Goldstein, Matheus Castello, Roger Bravo, e meu colegas do LIAMF, por conta da pandemia nossa convivência foi curta mas foi um prazer conhecer todos vocês.
+
+
+Por fim gostaria de agradecer meu grande amigo Patrick Eli Catach. Por conta da distância entre a Inglaterra e o Brasil as oportunidades de nos vermos são raras, mas isso nunca o impediu de se interessar pelo meu trabalho --- às vezes até mais do que eu --- e de sempre ser o primeiro a querer ler meus rascunhos incompletos.
+Seu apoio foi muito importante para mim e para esse projeto, seja me recebendo nas suas raras visitas ao Brasil ou quando ele veio me visitar na Holanda e passamos boa parte do tempo discutindo meu projeto, silenciosamente trabalhando lado a lado ou até mesmo vindo me cobrar de mandar minha tese para ele ler. Para ele, a maioria desses acontecimentos devem ter sido corriqueiros e sem muito significado, mas para um amigo que mora tão longe e que poderia ter facilmente acabado se afastando e perdendo o contato ao sair do país --- como aconteceu com tantos outros no meio desse êxodo acadêmico --- sua dedicação e sinceridade foram extremamente marcantes. 
+
+\textit{I would also like to thank Minaksie Ramsoekh for all the help in getting to Delft and during my stay there.}
+
+
+\textit{They say science is built on-top of the shoulders of giants, however due to an archaic publishing model and corporate greed most of the population has no access to these giants to even attempt to climb on-top of them. That is why I would like to thank everyone involved in the dissemination of free and open science and in particular to Alexandra Elbakyan and her project Sci-Hub which was essential in the realization of this thesis.}
+
+
+\input{conteudo/resumoabstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% LISTAS DE FIGURAS ETC. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Como as listas que se seguem podem não incluir uma quebra de página
+% obrigatória, inserimos uma quebra manualmente aqui.
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+% Todas as listas são opcionais; Usando "\chapter*" elas não são incluídas
+% no sumário. As listas geradas automaticamente também não são incluídas por
+% conta das opções "notlot" e "notlof" que usamos para a package tocbibind.
+
+% Normalmente, "\chapter*" faz o novo capítulo iniciar em uma nova página, e as
+% listas geradas automaticamente também por padrão ficam em páginas separadas.
+% Como cada uma destas listas é muito curta, não faz muito sentido fazer isso
+% aqui, então usamos este comando para desabilitar essas quebras de página.
+% Se você preferir, comente as linhas com esse comando e des-comente as linhas
+% sem ele para criar as listas em páginas separadas. Observe que você também
+% pode inserir quebras de página manualmente (com \clearpage, veja o exemplo
+% mais abaixo).
+\newcommand\disablenewpage[1]{{\let\clearpage\par\let\cleardoublepage\par #1}}
+
+% Nestas listas, é melhor usar "raggedbottom" (veja basics.tex). Colocamos
+% a opção correspondente e as listas dentro de um grupo para ativar
+% raggedbottom apenas temporariamente.
+\bgroup
+\raggedbottom
+
+%%%%% Listas criadas manualmente
+
+\chapter*{List of Abbreviations}
+% \disablenewpage{\chapter*{Lista de abreviaturas}}
+
+\begin{tabular}{rl}
+    NLP & Natural Language Processing \\
+    ML & Machine Learning \\
+    LSP & Language Server Protocol \\
+    AST & Abstract Syntax Tree \\
+    DFA & Discrete Finite Automata \\
+    GloVe & Global Vectors (for Word Representation) \\
+    SQuAD & Stanford Question Answering Dataset  \\
+    BERT & Bidirectional Encoder Representations from Transformers \\
+    SBERT & Sentence-BERT \\
+    RoBERTa & Robustly optimized BERT approach \\
+    ALBERT & A Lite BERT \\
+    QA & Question Answering \\
+    dbmc1 & distiluse-base-multilingual-cased-v1 \\
+    Ptr-Net & Pointer Network \\
+    RNN & Recurrent Neural Network \\
+    LSTM & Long Short-Term Memory \\
+    TPE & Tree-structured Parzen Estimator \\
+    Acc & Accuracy \\
+    Val & Validation \\
+    IDE & Integrated Development Environment \\
+    ORM & Object Relational Mapping  \\
+    FAPESP & São Paulo Research Foundation (Fundação de Amparo à Pesquisa do Estado de São Paulo) \\
+    BEPE & Grant for Research Abroad (Bolsa Estágio de Pesquisa no Exterior) \\
+    TUDelft & Delft University of Technology (Technische Universiteit Delft) \\
+    SERG & Software Engineering Research Group\\
+\end{tabular}
+
+%\chapter*{Lista de símbolos}
+% \disablenewpage{\chapter*{Lista de símbolos}}
+
+% \begin{tabular}{rl}
+%   $\omega$ & Frequência angular\\
+%     $\psi$ & Função de análise \emph{wavelet}\\
+%     $\Psi$ & Transformada de Fourier de $\psi$\\
+% \end{tabular}
+
+% Quebra de página manual
+\clearpage
+
+%%%%% Listas criadas automaticamente
+
+% Você pode escolher se quer ou não permitir a quebra de página
+\listoffigures
+% \disablenewpage{\listoffigures}
+
+% Você pode escolher se quer ou não permitir a quebra de página
+\listoftables
+% \disablenewpage{\listoftables}
+
+% Esta lista é criada "automaticamente" pela package float quando
+% definimos o novo tipo de float "program" (em utils.tex)
+% Você pode escolher se quer ou não permitir a quebra de página
+% \listof{program}{\programlistname}
+\renewcommand\listoflistingscaption{List of Programs}
+\listoflistings
+% \disablenewpage{\listof{program}{\programlistname}}
+
+% Sumário (obrigatório)
+\tableofcontents
+
+\egroup % Final de "raggedbottom"
+
+
+% Referências indiretas ("x", veja "y") para o índice remissivo (opcionais,
+% pois o índice é opcional). É comum colocar esses itens no final do documento,
+% junto com o comando \printindex, mas em alguns casos isso torna necessário
+% executar texindy (ou makeindex) mais de uma vez, então colocar aqui é melhor.
+% \index{Inglês|see{Língua estrangeira}}
+% \index{Figuras|see{Floats}}
+% \index{Tabelas|see{Floats}}
+% \index{Código-fonte|see{Floats}}
+% \index{Subcaptions|see{Subfiguras}}
+% \index{Sublegendas|see{Subfiguras}}
+% \index{Equações|see{Modo matemático}}
+% \index{Fórmulas|see{Modo matemático}}
+% \index{Rodapé, notas|see{Notas de rodapé}}
+% \index{Captions}
+% \index{Versão original|see{Tese/Dissertação, versões}}
+% \index{Versão corrigida|see{Tese/Dissertação, versões}}
+% \index{Palavras estrangeiras|see{Língua estrangeira}}
+% \index{Floats!Algoritmo|see{Floats, ordem}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAPÍTULOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Aqui vai o conteúdo principal do trabalho, ou seja, os capítulos que compõem
+% a dissertação/tese. O comando mainmatter reinicia a contagem de páginas,
+% modifica a numeração para números arábicos e ativa a contagem de capítulos.
+\mainmatter
+
+\pagestyle{mainmatter}
+
+% Espaçamento simples
+\singlespacing
+
+
+
+\input{conteudo/01-intro e goals}
+\input{conteudo/02-eng software}
+\input{conteudo/03-NLP e ML}
+\input{conteudo/04-related work}
+\input{conteudo/05-dataset}
+\input{conteudo/06-models}
+\input{conteudo/07-results and experiments}
+\input{conteudo/08-conclusion}
+
+
+% \par   %(???? ta na quali mas n no novo template, acho.)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Um apêndice é algum conteúdo adicional de sua autoria que faz parte e
+% colabora com a ideia geral do texto mas que, por alguma razão, não precisa
+% fazer parte da sequência do discurso; por exemplo, a demonstração de um
+% teorema intermediário, as perguntas usadas em uma pesquisa qualitativa etc.
+%
+% Um anexo é um documento que não faz parte da tese (em geral, nem é de sua
+% autoria) mas é relevante para o conteúdo; por exemplo, a especificação do
+% padrão técnico ou a legislação que o trabalho discute, um artigo de jornal
+% apresentando a percepção do público sobre o tema da tese etc.
+%
+% Os comandos appendix e annex reiniciam a numeração de capítulos e passam
+% a numerá-los com letras. "annex" não faz parte de nenhuma classe padrão,
+% foi criado para este modelo. Se o trabalho não tiver apêndices ou anexos,
+% remova estas linhas.
+%
+% Diferentemente de \mainmatter, \backmatter etc., \appendix e \annex não
+% forçam o início de uma nova página. Em geral isso não é importante, pois
+% o comando seguinte costuma ser "\chapter", mas pode causar problemas com
+% a formatação dos cabeçalhos. Assim, vamos forçar uma nova página antes
+% de cada um deles.
+
+%%%% Apêndices %%%%
+
+\makeatletter
+\if@openright\cleardoublepage\else\clearpage\fi
+\makeatother
+
+\pagestyle{appendix}
+
+\appendix
+
+% \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
+% só há apêndices, sem anexos, provavelmente não é necessário.
+\addappheadtotoc
+
+\input{conteudo/apendices}
+\par
+
+%%%% Anexos %%%%
+
+% \makeatletter
+% \if@openright\cleardoublepage\else\clearpage\fi
+% \makeatother
+
+% \pagestyle{appendix} % repete o anterior, caso você não use apêndices
+
+% \annex
+
+% % \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
+% % só há anexos, sem apêndices, provavelmente não é necessário.
+% \addappheadtotoc
+
+% \input{conteudo/anexos}
+% \par
+
+
+%%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%
+
+% O comando backmatter desabilita a numeração de capítulos.
+\backmatter
+
+\pagestyle{backmatter}
+
+% Espaço adicional no sumário antes das referências / índice remissivo
+\addtocontents{toc}{\vspace{2\baselineskip plus .5\baselineskip minus .5\baselineskip}}
+
+% A bibliografia é obrigatória
+
+\printbibliography[
+  title=\refname\label{bibliografia}, % "Referências", recomendado pela ABNT
+  %title=\bibname\label{bibliografia}, % "Bibliografia"
+  heading=bibintoc, % Inclui a bibliografia no sumário
+]
+
+% \printindex % imprime o índice remissivo no documento (opcional)
+
+\end{document}
